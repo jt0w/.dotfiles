@@ -2,13 +2,16 @@
   inputs,
   system,
   pkgs,
+  theme,
   ...
 }: {
   home.sessionVariables = {
     EDITOR = "nvim";
   };
   home.packages = with pkgs; [
-    inputs.neovim-config.packages.${system}.default
+    (inputs.neovim-config.packages.${system}.default.override {
+      base16-theme = theme;
+    })
 
     (typst.withPackages (
       p:

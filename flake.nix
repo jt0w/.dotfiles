@@ -44,6 +44,8 @@
     flake-dir = ./.;
     overlays = [
     ];
+    theme = "everforest-dark-hard";
+    polarity = "dark";
   in {
     nixosConfigurations = {
       nixos = lib.nixosSystem {
@@ -52,6 +54,8 @@
           inherit overlays;
           inherit hyprland-qtutils;
           inherit flake-dir;
+          inherit theme;
+          inherit polarity;
         };
         modules = [
           ./configuration.nix
@@ -74,6 +78,8 @@
         inherit ghostty;
         inherit flake-dir;
         inherit system;
+        inherit theme;
+        inherit polarity;
       };
     };
   };

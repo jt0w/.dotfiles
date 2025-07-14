@@ -1,13 +1,15 @@
 {
   pkgs,
   flake-dir,
+  theme,
+  polarity,
   ...
 }: {
   stylix.enable = true;
-  stylix.image = flake-dir + /bgs/mocha/koi.jpg;
+  stylix.image = flake-dir + /bgs/forest_stairs.jpg;
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-  stylix.polarity = "dark";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme}.yaml";
+  stylix.polarity = polarity;
 
   stylix.cursor.package = pkgs.phinger-cursors;
   stylix.cursor.name = "phinger-cursors-dark";

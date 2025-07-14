@@ -9,6 +9,7 @@
     package = ghostty.packages.x86_64-linux.default;
     installVimSyntax = true;
     installBatSyntax = true;
+    clearDefaultKeybinds = true;
 
     settings = {
       background-opacity = 0.8;

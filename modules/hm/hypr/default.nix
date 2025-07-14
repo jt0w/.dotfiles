@@ -153,7 +153,7 @@
       ];
 
       windowrulev2 = [
-        "opacity 0.8 0.8, class:^(vesktop|firefox|thunar|Ardour)$"
+        "opacity 0.8 0.8, class:^(vesktop|librewolf|thunar|Ardour)$"
       ];
 
       layerrule = [
