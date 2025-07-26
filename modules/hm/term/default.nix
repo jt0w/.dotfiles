@@ -12,9 +12,6 @@
     clearDefaultKeybinds = true;
 
     settings = {
-      background-opacity = 0.8;
-      cursor-opacity = 0.8;
-
       font-feature = "cv03,cv05,cv06,cv08,cv61,ss03";
 
       clipboard-read = "allow";
@@ -72,8 +69,8 @@
         "alt+9=goto_tab:9"
         "alt+0=goto_tab:10"
 
-        "ctrl+plus=increase_font_size:2"
-        "ctrl+minus=decrease_font_size:2"
+        "ctrl+bracket_right=increase_font_size:2"
+        "ctrl+slash=decrease_font_size:2"
 
         "super+tab=toggle_quick_terminal"
       ];

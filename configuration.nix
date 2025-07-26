@@ -104,7 +104,7 @@
   users.users.lukas = {
     isNormalUser = true;
     description = "Lukas";
-    extraGroups = ["networkmanager" "wheel" "libvirtd" "docker" "audio" "wireshark"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd" "docker" "audio" "wireshark" "storage"];
     packages = [];
   };
   # Allow unfree packages
@@ -178,13 +178,13 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.trusted-users = ["lukas"];
   services.hardware.openrgb.enable = true;
-  nix.settings = {
-    substituters = ["https://ezkea.cachix.org"];
-    trusted-public-keys = ["ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="];
-  };
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
   '';
   security.polkit.enable = true;
+
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 }

@@ -11,8 +11,9 @@
     ./modules/hm/term
     ./modules/hm/sh
     ./modules/hm/git
+    ./modules/hm/emacs
     ./modules/hm/neovim
-    ./modules/hm/hypr
+    ./modules/hm/sway
     ./modules/hm/multiplexer
     ./modules/hm/direnv/direnv.nix
     ./modules/hm/pkgs.nix
@@ -29,4 +30,5 @@
       uris = ["qemu:///system"];
     };
   };
+  services.udiskie.enable = true;
 }

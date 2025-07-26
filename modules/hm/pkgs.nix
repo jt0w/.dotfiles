@@ -21,6 +21,7 @@
     fasm
     gnumake
     gcc
+    cloc
     c3c
     odin
     nodePackages.nodejs
@@ -47,7 +48,6 @@
     man
     wget
     file
-    sesh
     (vesktop.override {
       withMiddleClickScroll = true;
     })
@@ -154,6 +154,8 @@
 
     linuxsampler
     qsampler
+
+    element-desktop
   ];
   programs.helix = {
     enable = true;
@@ -276,6 +278,7 @@
         sponsorblock
         darkreader
         vimium
+        ublock-origin
       ];
     };
   };
@@ -290,4 +293,6 @@
   };
   services.cliphist.enable = true;
   programs.fastfetch.enable = true;
+  stylix.targets.halloy.enable = false;
+  programs.halloy.enable = true;
 }

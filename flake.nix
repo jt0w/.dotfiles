@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    emacs-config = {
+      url = "github:secretval/.emacs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     musnix = {url = "github:musnix/musnix";};
 
     minimal-tmux = {
@@ -36,6 +41,7 @@
     stylix,
     hyprland-qtutils,
     ghostty,
+    emacs-config,
     ...
   }: let
     system = "x86_64-linux";
@@ -44,7 +50,7 @@
     flake-dir = ./.;
     overlays = [
     ];
-    theme = "everforest-dark-hard";
+    theme = "snazzy";
     polarity = "dark";
   in {
     nixosConfigurations = {
@@ -80,6 +86,7 @@
         inherit system;
         inherit theme;
         inherit polarity;
+        inherit emacs-config;
       };
     };
   };

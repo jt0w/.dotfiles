@@ -6,7 +6,7 @@
   ...
 }: {
   stylix.enable = true;
-  stylix.image = flake-dir + /bgs/forest_stairs.jpg;
+  stylix.image = flake-dir + /bgs/rocky_beach_1.png;
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme}.yaml";
   stylix.polarity = polarity;
