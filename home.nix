@@ -11,7 +11,6 @@
     ./modules/hm/term
     ./modules/hm/sh
     ./modules/hm/git
-    ./modules/hm/emacs
     ./modules/hm/neovim
     ./modules/hm/sway
     ./modules/hm/multiplexer

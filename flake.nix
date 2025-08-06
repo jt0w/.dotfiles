@@ -22,16 +22,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-config = {
-      url = "github:secretval/.emacs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     musnix = {url = "github:musnix/musnix";};
 
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    kanagawa = {
+      url = "github:rebelot/kanagawa.nvim";
+      flake = false;
     };
   };
 
@@ -41,7 +41,6 @@
     stylix,
     hyprland-qtutils,
     ghostty,
-    emacs-config,
     ...
   }: let
     system = "x86_64-linux";
@@ -50,7 +49,7 @@
     flake-dir = ./.;
     overlays = [
     ];
-    theme = "snazzy";
+    theme = "catppuccin-mocha";
     polarity = "dark";
   in {
     nixosConfigurations = {
@@ -86,7 +85,6 @@
         inherit system;
         inherit theme;
         inherit polarity;
-        inherit emacs-config;
       };
     };
   };

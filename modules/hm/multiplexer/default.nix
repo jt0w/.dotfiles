@@ -16,6 +16,14 @@
         plugin = tmux-sessionx;
         extraConfig = "set -g @sessionx-bind 'f'";
       }
+      {
+        plugin = resurrect;
+        extraConfig = "set -g @resurrect-strategy-nvim 'session'";
+      }
+      {
+        plugin = continuum;
+        extraConfig = "set -g @continuum-restore 'on'";
+      }
     ];
     extraConfig = let
       prefix = "ö";

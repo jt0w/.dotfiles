@@ -12,7 +12,7 @@
     clearDefaultKeybinds = true;
 
     settings = {
-      font-feature = "cv03,cv05,cv06,cv08,cv61,ss03";
+      font-feature = "cv1,cv03,cv05,cv06,cv08,cv61,ss03,ss07,ss09,ss11,ss10";
 
       clipboard-read = "allow";
       clipboard-write = "allow";

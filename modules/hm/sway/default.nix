@@ -17,7 +17,7 @@
     config = {
       window = {
         titlebar = false;
-        hideEdgeBorders = "none";
+        hideEdgeBorders = "smart";
       };
       startup = [
         {
@@ -57,7 +57,6 @@
       terminal = "ghostty";
       keybindings = let
         mod = config.wayland.windowManager.sway.config.modifier;
-        amod = "Mod1";
         terminal = config.wayland.windowManager.sway.config.terminal;
         filemanager = "thunar";
         browser = "librewolf";
@@ -72,9 +71,6 @@
           "${mod}+t" = "exec grim ~/HDD/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')";
           "${mod}+shift+t" = "exec slurp | grim -g - ~/HDD/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')";
           "${mod}+a" = "exec foot -e pulsemixer";
-
-          "${amod}+e" = "emacsclient -c -e 'emacs'";
-          "${amod}+shift+e" = "emacsclient -c --eval '(emacs-everywhere)' -e 'emacs'";
         };
     };
   };

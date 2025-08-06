@@ -18,6 +18,7 @@
     edb
     gdb
     gf
+    xxd
     fasm
     gnumake
     gcc
@@ -36,6 +37,7 @@
     sl
     cowsay
     nitch
+    inetutils
     deadbeef
     alejandra
     fortune
@@ -58,6 +60,7 @@
     libresprite
     krita
     inkscape
+    penpot-desktop
     mypaint
     mypaint-brushes
     mypaint-brushes1
@@ -96,7 +99,6 @@
     libreoffice
     ferdium
     sshfs
-    unetbootin
     qmk
 
     ghostty.packages.${system}.default
@@ -113,7 +115,7 @@
     # carla
     helm
     odin2
-    tunefish
+    # tunefish
     redux
     surge
     surge-XT
@@ -138,10 +140,10 @@
     infamousPlugins
     oxefmsynth
     sfizz
-    ChowKick
-    ChowPhaser
-    ChowCentaur
-    CHOWTapeModel
+    # ChowKick
+    # ChowPhaser
+    # ChowCentaur
+    # CHOWTapeModel
     swh_lv2
     airwindows
     wolf-shaper
@@ -157,6 +159,12 @@
 
     element-desktop
   ];
+
+  # TODO: why?
+  # NOTE: needed for some audio plugins
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "libsoup-2.74.3"
+  # ];
   programs.helix = {
     enable = true;
     languages = {
@@ -200,7 +208,7 @@
       };
 
       search = {
-        default = "unduck";
+        default = "duckduckgo";
         engines = {
           "unduck" = {
             urls = [
@@ -279,6 +287,9 @@
         darkreader
         vimium
         ublock-origin
+        unpaywall
+        untrap-for-youtube
+        return-youtube-dislikes
       ];
     };
   };
@@ -293,6 +304,4 @@
   };
   services.cliphist.enable = true;
   programs.fastfetch.enable = true;
-  stylix.targets.halloy.enable = false;
-  programs.halloy.enable = true;
 }
