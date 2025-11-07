@@ -7,9 +7,11 @@
   lib,
   ...
 }: {
+  nix.package = pkgs.lixPackageSets.stable.lix;
   imports = [
     ./hardware-configuration.nix
     ./modules/nixos/hypr
+    ./modules/nixos/dwl
     ./modules/nixos/greetd
     ./modules/shared
     ./modules/nixos/nivida/nvidia.nix
@@ -34,7 +36,7 @@
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
 
-  environment.systemPackages = [pkgs.man-pages pkgs.man-pages-posix];
+  environment.systemPackages = [pkgs.man-pages pkgs.man-pages-posix pkgs.xorg.xinit];
   documentation.dev.enable = true;
   documentation.man = {
     enable = true;
@@ -119,8 +121,8 @@
     enable = true;
 
     qemu = {
-      ovmf.enable = true;
-      ovmf.packages = [pkgs.OVMFFull.fd];
+      # ovmf.enable = true;
+      # ovmf.packages = [pkgs.OVMFFull.fd];
       swtpm.enable = true;
     };
   };
@@ -151,6 +153,8 @@
     clean.enable = true;
   };
 
+  services.flatpak.enable = true;
+
   hardware.opentabletdriver.enable = true;
   hardware.keyboard.qmk.enable = true;
   services.udev.packages = with pkgs; [qmk-udev-rules];
@@ -178,6 +182,10 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nix.settings.trusted-users = ["lukas"];
   services.hardware.openrgb.enable = true;
+  programs.coolercontrol = {
+    enable = true;
+    nvidiaSupport = true;
+  };
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"

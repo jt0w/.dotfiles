@@ -15,6 +15,11 @@
   stylix.cursor.name = "phinger-cursors-dark";
   stylix.cursor.size = 16;
 
+  # stylix.opacity.terminal = 0.8;
+  # stylix.opacity.applications = 0.8;
+  # stylix.opacity.desktop = 0.8;
+  # stylix.opacity.popups = 0.8;
+
   stylix.fonts = {
     sizes = {
       terminal = 14;

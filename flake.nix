@@ -33,6 +33,8 @@
       url = "github:rebelot/kanagawa.nvim";
       flake = false;
     };
+
+    winboat.url = "github:TibixDev/winboat";
   };
 
   outputs = inputs @ {
@@ -49,7 +51,7 @@
     flake-dir = ./.;
     overlays = [
     ];
-    theme = "catppuccin-mocha";
+    theme = "gruber";
     polarity = "dark";
   in {
     nixosConfigurations = {
@@ -86,6 +88,20 @@
         inherit theme;
         inherit polarity;
       };
+    };
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [
+        wayland
+        wayland-protocols
+        wayland-scanner
+        libinput
+        pixman
+        libxkbcommon
+        libdrm
+        fcft
+        wlroots
+        pkg-config
+      ];
     };
   };
 }

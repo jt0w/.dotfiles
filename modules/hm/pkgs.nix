@@ -13,9 +13,13 @@
   # fonts
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    #fonts
+    fira-math
+    cm_unicode
+
     # ESSENTIAL
     woomer
-    edb
+    # edb
     gdb
     gf
     xxd
@@ -23,7 +27,7 @@
     gnumake
     gcc
     cloc
-    c3c
+    # c3c
     odin
     nodePackages.nodejs
     nodePackages.pnpm
@@ -95,6 +99,10 @@
     # my pkgs
     inputs.kix.packages.${system}.default
 
+    # windows crap
+    inputs.winboat.packages.${system}.winboat
+    freerdp
+
     swayimg
     libreoffice
     ferdium
@@ -105,20 +113,29 @@
 
     # games
     lutris
+    daggerfall-unity
+
     # music
     ardour
+    audacity
     bespokesynth
     audacious
     audacious-plugins
+    # muffon
+
+    milkytracker
+
+    musescore
+    muse-sounds-manager
 
     distrho-ports
     # carla
     helm
     odin2
-    # tunefish
+    tunefish
     redux
     surge
-    surge-XT
+    # surge-XT
     lsp-plugins
     dexed
     drumkv1
@@ -133,17 +150,17 @@
     fluidsynth
     zynaddsubfx
     cardinal
-    artyFX
+    # artyFX
     bchoppr
     dragonfly-reverb
     eq10q
-    infamousPlugins
+    # infamousPlugins
     oxefmsynth
     sfizz
-    # ChowKick
-    # ChowPhaser
-    # ChowCentaur
-    # CHOWTapeModel
+    ChowKick
+    ChowPhaser
+    ChowCentaur
+    CHOWTapeModel
     swh_lv2
     airwindows
     wolf-shaper
@@ -174,8 +191,8 @@
     };
   };
 
-  stylix.targets.librewolf.profileNames = ["default"];
-  programs.librewolf = {
+  stylix.targets.firefox.profileNames = ["default"];
+  programs.firefox = {
     enable = true;
     profiles.default = {
       settings = {
@@ -281,16 +298,19 @@
         };
         force = true;
       };
-      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-        bitwarden
-        sponsorblock
-        darkreader
-        vimium
-        ublock-origin
-        unpaywall
-        untrap-for-youtube
-        return-youtube-dislikes
-      ];
+      extensions = {
+        force = true;
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
+          sponsorblock
+          darkreader
+          vimium
+          ublock-origin
+          unpaywall
+          untrap-for-youtube
+          return-youtube-dislikes
+        ];
+      };
     };
   };
   programs.thunderbird = {
@@ -304,4 +324,6 @@
   };
   services.cliphist.enable = true;
   programs.fastfetch.enable = true;
+  programs.radio-active.enable = true;
+  services.amberol.enable = true;
 }
