@@ -28,7 +28,7 @@
 
   dwlWrapper = pkgs.writeScriptBin "dwlWrapper" ''
     #!/usr/bin/env sh
-     exec ${lib.getExe pkgs.slstatus} -s | ${lib.getExe dwlPackage} -s "swaybg -i ~/.dotfiles/bg/gruvbox_1.jpg &"
+     exec ${lib.getExe pkgs.slstatus} -s | ${lib.getExe dwlPackage}
   '';
 in {
   programs.dwl = {
