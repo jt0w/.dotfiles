@@ -12,7 +12,7 @@
     ./modules/hm/sh
     ./modules/hm/git
     ./modules/hm/neovim
-    ./modules/hm/hypr
+    ./modules/hm/dwl
     ./modules/hm/sway
     ./modules/hm/multiplexer
     ./modules/hm/direnv/direnv.nix

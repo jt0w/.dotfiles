@@ -34,7 +34,7 @@
       flake = false;
     };
 
-    winboat.url = "github:TibixDev/winboat";
+    # winboat.url = "github:TibixDev/winboat";
   };
 
   outputs = inputs @ {
@@ -51,7 +51,7 @@
     flake-dir = ./.;
     overlays = [
     ];
-    theme = "gruber";
+    theme = "gruvbox-dark";
     polarity = "dark";
   in {
     nixosConfigurations = {

@@ -21,87 +21,49 @@
         font-family: JetBrainsMono Nerd Font Propo;
         font-size: 15px;
         font-weight: bold;
+        border: none;
+        border-radius: 0;
       }
 
       window#waybar {
-        border-radius: 0.6rem;
-        border: 2px solid @base06;
-        color: @base05;
+        background: alpha(@base00, 0.9);
       }
 
-      window#waybar.empty #window{
-        background: none;
-      }
-
-      #workspaces {
-        background: transparent;
-        margin: 5px 10px;
-        padding: 0px 0px;
-        border-radius: 15px;
-      }
-
-      #workspaces button {
-        background: @base02;
+      #tags button {
         color: @base04;
-        border: none;
-        border-radius: 8px;
-        min-width: 15px;
-        margin: 2px 3px;
-        padding: 4px 8px;
-        transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease, min-width 0.3s ease;
       }
 
-      #workspaces button.active {
-        background: @base05;
-        color: @base00;
-        box-shadow: 0 2px 8px @base01;
-        padding: 4px 8px;
-        min-width: 25px;
+      #tags button:hover {
+        color: @base06;
       }
 
-
-      #workspaces button:hover {
-        background: @base03;
+      #tags button.occupied {
         color: @base05;
       }
 
-      #workspaces button.occupied {
-        background: @base02;
-        color: @base05;
+      #tags button.focused {
+        color: @base0E;
       }
 
-      #workspaces button.urgent {
-        background: @base08;
-        color: @base00;
+      #tags button.urgent {
+        color: @base08;
       }
 
-      #custom-power {
-        padding: 5px 8px;
-        margin:  5px 5px;
+      #cpu, #memory, #pulseaudio, #clock {
+        padding: 0px 5px;
+        margin:  0px 5px;
       }
     '';
     settings = {
       mainBar = {
-        margin = "5 10 0 10";
-        position = "top";
-        height = 42;
+        margin = "0 0 0 0";
+        position = "bottom";
+        height = 20;
 
-        modules-left = ["hyprland/workspaces" "wlr/taskbar"];
-        modules-center = ["hyprland/window"];
-        modules-right = ["tray" "cpu" "memory" "pulseaudio" "clock" "custom/power"];
+        modules-left = ["dwl/tags"];
+        modules-center = ["dwl/window"];
+        modules-right = ["cpu" "memory" "pulseaudio" "clock"];
 
-        "hyprland/workspaces" = {
-          "format" = "{name}";
-          "on-click" = "activate";
-          "sort-by-number" = true;
-          "active-only" = false;
-        };
-
-        "wlr/taskbar" = {
-          "on-click" = "activate";
-          "on-click-right" = "minimize-raise";
-          "on-click-middle" = "close";
-        };
 
         "pulseaudio" = {
           "scroll-step" = 1;
@@ -120,7 +82,6 @@
             "car" = "";
             "default" = ["" "" ""];
           };
-
           "on-click" = "pavucontrol";
         };
         "tray" = {
@@ -132,10 +93,6 @@
         };
         "memory" = {
           "format" = "{percentage}% ";
-        };
-        "custom/power" = {
-          "format" = "";
-          "on-click" = "wlogout";
         };
       };
     };

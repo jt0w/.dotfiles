@@ -69,7 +69,7 @@
     mypaint-brushes
     mypaint-brushes1
     libsForQt5.qt5.qtwayland
-    glfw-wayland-minecraft
+    glfw
 
     htop
     git-extras
@@ -86,7 +86,7 @@
     fasm
 
     #extra
-    bitwarden
+    bitwarden-desktop
     openssl
     bat
     ripgrep
@@ -100,7 +100,7 @@
     inputs.kix.packages.${system}.default
 
     # windows crap
-    inputs.winboat.packages.${system}.winboat
+    # inputs.winboat.packages.${system}.winboat
     freerdp
 
     swayimg
@@ -112,8 +112,8 @@
     ghostty.packages.${system}.default
 
     # games
-    lutris
-    daggerfall-unity
+    # lutris
+    # daggerfall-unity
 
     # music
     ardour
@@ -157,10 +157,10 @@
     # infamousPlugins
     oxefmsynth
     sfizz
-    ChowKick
-    ChowPhaser
-    ChowCentaur
-    CHOWTapeModel
+    chow-kick
+    chow-phaser
+    chow-centaur
+    chow-tape-model
     swh_lv2
     airwindows
     wolf-shaper

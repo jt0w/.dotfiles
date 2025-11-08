@@ -10,7 +10,6 @@
   nix.package = pkgs.lixPackageSets.stable.lix;
   imports = [
     ./hardware-configuration.nix
-    ./modules/nixos/hypr
     ./modules/nixos/dwl
     ./modules/nixos/greetd
     ./modules/shared
@@ -184,7 +183,7 @@
   services.hardware.openrgb.enable = true;
   programs.coolercontrol = {
     enable = true;
-    nvidiaSupport = true;
+    # nvidiaSupport = true;
   };
 
   services.udev.extraRules = ''

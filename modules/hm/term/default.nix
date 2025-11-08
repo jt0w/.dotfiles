@@ -12,8 +12,8 @@
     clearDefaultKeybinds = true;
 
     settings = {
-      # background-opacity = 0.8;
-      # cursor-opacity = 0.8;
+      background-opacity = 0.9;
+      cursor-opacity = 0.9;
 
       font-feature = "cv1,cv03,cv05,cv06,cv08,cv61,ss03,ss07,ss09,ss11,ss10";
 

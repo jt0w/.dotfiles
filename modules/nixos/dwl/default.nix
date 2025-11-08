@@ -26,21 +26,27 @@
         ]);
     });
 
+
   dwlWrapper = pkgs.writeScriptBin "dwlWrapper" ''
     #!/usr/bin/env sh
-     exec ${lib.getExe pkgs.slstatus} -s | ${lib.getExe dwlPackage}
+    exec ${lib.getExe dwlPackage}
   '';
 in {
   programs.dwl = {
     enable = true;
-    package = dwlPackage;
+    package = dwlWrapper;
     extraSessionCommands = ''
       export XKB_DEFAULT_LAYOUT=de;
     '';
   };
   environment.systemPackages = with pkgs; [
-    dwlWrapper
+    dwlPackage
     wmenu
     swaybg
-  ];
+ ];
+
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs;[xdg-desktop-portal-gtk];
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 }
