@@ -1,3 +1,20 @@
+#define BASE_00 "@base00@"
+#define BASE_01 "@base01@"
+#define BASE_02 "@base02@"
+#define BASE_03 "@base03@"
+#define BASE_04 "@base04@"
+#define BASE_05 "@base05@"
+#define BASE_06 "@base06@"
+#define BASE_07 "@base07@"
+#define BASE_08 "@base08@"
+#define BASE_09 "@base09@"
+#define BASE_0A "@base0A@"
+#define BASE_0B "@base0B@"
+#define BASE_0C "@base0C@"
+#define BASE_0D "@base0D@"
+#define BASE_0E "@base0E@"
+#define BASE_0F "@base0F@"
+
 /* Taken from https://github.com/djpohly/dwl/issues/466 */
 #define COLOR(hex)    { ((hex >> 24) & 0xFF) / 255.0f, \
                         ((hex >> 16) & 0xFF) / 255.0f, \
@@ -23,14 +40,6 @@ static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You ca
 
 /* logging */
 static int log_level = WLR_ERROR;
-
-/* Autostart */
-static const char *const autostart[] = {
-  "sh", "-c", "swaybg -i ~/.dotfiles/bgs/gruvbox_1.jpg", NULL,
-  "sh", "-c", "wl-paste --watch cliphist store", NULL,
-  NULL /* terminate */
-};
-
 
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
@@ -133,24 +142,20 @@ static const int cursor_timeout = 5;
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
-/* commands */
-static const char *termcmd[] = { "ghostty", NULL };
-static const char *menucmd[] = {
-    "wmenu-run",
-    "-f", "Iosevka Jt0w Bold 12",
-    "-l", "10",
-    NULL
-};
+#define MENU_OPTIONS(CMD) CMD" -f 'Iosevka Jt0w Bold 12' -l 10 -N "BASE_00" -n "BASE_05" -M"BASE_01" -m "BASE_05" -S "BASE_02" -s "BASE_05
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
-	{ MODKEY,                    XKB_KEY_d,          spawn,          {.v = menucmd} },
-	{ MODKEY,                    XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY,                    XKB_KEY_d,          spawn,          SHCMD(MENU_OPTIONS("foot sh -c \"$("MENU_OPTIONS("wmenu-run")")\"")) },
+	{ MODKEY,                    XKB_KEY_Return,     spawn,          SHCMD("ghostty")},
 	{ MODKEY,                    XKB_KEY_g,          togglegaps,     {0} },
-	{ MODKEY,                    XKB_KEY_v,          spawn,          SHCMD("cliphist list | wmenu -f 'Iosevka Jt0w Bold 12' -l 10 | cliphist decode | wl-copy")},
+	{ MODKEY,                    XKB_KEY_v,          spawn,          SHCMD("cliphist list | "MENU_OPTIONS("wmenu")" | cliphist decode | wl-copy")},
 	{ MODKEY,                    XKB_KEY_s,          spawn,          SHCMD("grim -g \"$(slurp)\" - | wl-copy")},
-  	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
+	{ MODKEY,                    XKB_KEY_a,          spawn,          SHCMD("foot pulsemixer")},
+	{ MODKEY,                    XKB_KEY_m,          spawn,          SHCMD("foot rmpc")},
+	{ MODKEY,                    XKB_KEY_b,          spawn,          SHCMD("firefox")},
+	{ MODKEY,                    XKB_KEY_f,          spawn,          SHCMD("thunar")},
 
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
@@ -164,12 +169,12 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY,                    XKB_KEY_q,          killclient,     {0} },
-	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	// { MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
+	// { MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
+	// { MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY                     , XKB_KEY_e,         togglefullscreen, {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
   { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
   { MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },

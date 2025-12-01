@@ -7,6 +7,7 @@
       cat = "bat";
       cd = "z";
       ci = "zi";
+      nix-shell = "nix-shell --command fish";
     };
 
     shellAbbrs = {

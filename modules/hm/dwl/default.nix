@@ -64,7 +64,6 @@
         modules-center = ["dwl/window"];
         modules-right = ["cpu" "memory" "pulseaudio" "clock"];
 
-
         "pulseaudio" = {
           "scroll-step" = 1;
           "format" = "{volume}% {icon}  {format_source}";

@@ -1,6 +1,6 @@
 {
   pkgs,
-  inputs,
+  config,
   ...
 }: {
   programs.tmux = {
@@ -11,7 +11,6 @@
     escapeTime = 0;
     baseIndex = 1;
     plugins = with pkgs.tmuxPlugins; [
-      {plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;}
       {
         plugin = tmux-sessionx;
         extraConfig = "set -g @sessionx-bind 'f'";
@@ -27,7 +26,7 @@
     ];
     extraConfig = let
       prefix = "ö";
-    in ''
+    in with config.lib.stylix.colors.withHashtag; ''
       unbind C-b
       set-option -g prefix ${prefix}
       bind-key ${prefix} send-prefix
@@ -44,6 +43,19 @@
       bind -r j select-pane -D
       bind -r h select-pane -L
       bind -r l select-pane -R
+
+      set -g focus-events on
+      set -g status-style fg=${base05},bg=default
+      set-window-option -g window-status-style bg=default,fg=${base04}
+      set-window-option -g window-status-current-style bg=default,fg=${base05}
+      set -g status-left "#S"
+      set -g status-right "%H:%M %d.%m.%y"
+      set -g window-status-current-format "#I:#W"
+      set -g window-status-format "#I:#W"
+
+      set -g status-left-length 99
+      set -g status-right-length 99
+      set -g status-justify absolute-centre
     '';
   };
 }

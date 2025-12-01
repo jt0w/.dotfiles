@@ -53,6 +53,7 @@
     ];
     theme = "gruvbox-dark";
     polarity = "dark";
+    user = "lukas";
   in {
     nixosConfigurations = {
       nixos = lib.nixosSystem {
@@ -71,7 +72,7 @@
         ];
       };
     };
-    homeConfigurations."lukas" = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
         stylix.homeModules.stylix
@@ -87,6 +88,7 @@
         inherit system;
         inherit theme;
         inherit polarity;
+        inherit user;
       };
     };
     devShells.${system}.default = pkgs.mkShell {

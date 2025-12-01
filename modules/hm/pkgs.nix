@@ -54,9 +54,8 @@
     man
     wget
     file
-    (vesktop.override {
-      withMiddleClickScroll = true;
-    })
+    legcord
+    discordo
     appimage-run
     pokeget-rs
     prismlauncher
@@ -196,8 +195,6 @@
     enable = true;
     profiles.default = {
       settings = {
-        "sidebar.verticalTabs" = true;
-        "sidebar.expandOnHover" = true;
         "general.autoScroll" = true;
         "browser.download.alwaysOpenPanel" = true;
         "browser.download.panel.shown" = true;

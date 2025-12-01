@@ -12,6 +12,7 @@
     ./modules/hm/sh
     ./modules/hm/git
     ./modules/hm/neovim
+    ./modules/hm/music
     ./modules/hm/dwl
     ./modules/hm/sway
     ./modules/hm/multiplexer
