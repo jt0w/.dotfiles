@@ -4,6 +4,11 @@
     text = builtins.readFile ./custom.css;
   };
 
+  xdg.configFile."ghostty/cursor-warp.glsl" = {
+    enable = true;
+    text = builtins.readFile ./cursor-warp.glsl;
+  };
+
   programs.ghostty = {
     enable = true;
     package = ghostty.packages.x86_64-linux.default;
@@ -12,9 +17,6 @@
     clearDefaultKeybinds = true;
 
     settings = {
-      background-opacity = 0.9;
-      cursor-opacity = 0.9;
-
       font-feature = "cv1,cv03,cv05,cv06,cv08,cv61,ss03,ss07,ss09,ss11,ss10";
 
       clipboard-read = "allow";
@@ -26,6 +28,7 @@
       cursor-style = "block";
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
+      adjust-cursor-thickness = "100%";
 
       confirm-close-surface = false;
 
@@ -35,6 +38,8 @@
       gtk-tabs-location = "bottom";
       gtk-wide-tabs = false;
       gtk-custom-css = "./custom.css";
+
+      custom-shader = "./cursor-warp.glsl";
 
       quick-terminal-position = "center";
 

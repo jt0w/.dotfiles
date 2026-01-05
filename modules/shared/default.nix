@@ -6,7 +6,7 @@
   ...
 }: {
   stylix.enable = true;
-  stylix.image = flake-dir + /bgs/rocky_beach_1.png;
+  stylix.image = flake-dir + /bgs/mocha/pixel-galaxy.png;
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme}.yaml";
   stylix.polarity = polarity;
@@ -14,11 +14,6 @@
   stylix.cursor.package = pkgs.phinger-cursors;
   stylix.cursor.name = "phinger-cursors-dark";
   stylix.cursor.size = 16;
-
-  stylix.opacity.terminal = 0.9;
-  stylix.opacity.applications = 0.9;
-  stylix.opacity.desktop = 0.9;
-  stylix.opacity.popups = 0.9;
 
   stylix.fonts = {
     sizes = {

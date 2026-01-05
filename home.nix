@@ -32,4 +32,5 @@
     };
   };
   services.udiskie.enable = true;
+  services.ssh-agent.enable = true;
 }

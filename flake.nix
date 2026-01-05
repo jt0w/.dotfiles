@@ -10,38 +10,36 @@
     ghostty = {
       url = "github:ghostty-org/ghostty";
     };
-    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
     kix = {
-      url = "github:secretval/kix";
+      url = "github:jt0w/kix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     neovim-config = {
-      url = "github:secretval/.nvim";
+      url = "github:jt0w/.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    musnix = {url = "github:musnix/musnix";};
+    musnix = {
+      url = "github:musnix/musnix";
+    };
 
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    kanagawa = {
-      url = "github:rebelot/kanagawa.nvim";
-      flake = false;
+    arkenfox = {
+      url = "github:dwarfmaster/arkenfox-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # winboat.url = "github:TibixDev/winboat";
   };
 
   outputs = inputs @ {
     nixpkgs,
     home-manager,
     stylix,
-    hyprland-qtutils,
     ghostty,
     ...
   }: let
@@ -51,7 +49,7 @@
     flake-dir = ./.;
     overlays = [
     ];
-    theme = "gruvbox-dark";
+    theme = "tender";
     polarity = "dark";
     user = "lukas";
   in {
@@ -60,7 +58,6 @@
         specialArgs = {
           inherit inputs;
           inherit overlays;
-          inherit hyprland-qtutils;
           inherit flake-dir;
           inherit theme;
           inherit polarity;
@@ -77,6 +74,7 @@
       modules = [
         stylix.homeModules.stylix
         inputs.nur.modules.homeManager.default
+        inputs.arkenfox.hmModules.arkenfox
 
         ./home.nix
       ];
@@ -90,20 +88,6 @@
         inherit polarity;
         inherit user;
       };
-    };
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [
-        wayland
-        wayland-protocols
-        wayland-scanner
-        libinput
-        pixman
-        libxkbcommon
-        libdrm
-        fcft
-        wlroots
-        pkg-config
-      ];
     };
   };
 }

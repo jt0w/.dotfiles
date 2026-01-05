@@ -3,8 +3,8 @@
   lib,
   config,
   ...
-}: let
-  palette = config.lib.stylix.colors;
+}:
+let
   dwlPackage =
     (pkgs.dwl.override {
       configH = pkgs.replaceVars ./config.def.h {
@@ -25,30 +25,48 @@
         base0E = config.lib.stylix.colors.base0E;
         base0F = config.lib.stylix.colors.base0F;
       };
-    }).overrideAttrs (old: {
-      patches = lib.filesystem.listFilesRecursive ./patches;
-    });
+    }).overrideAttrs
+      (old: {
+        buildInputs =
+          (old.buildInputs or [])
+          ++ (with pkgs; [
+              fcft
+              libdrm
+          ]);
+        patches = [
+        ./patches/bar.patch
+        ./patches/bar-appicons.patch
+        ./patches/gaps.patch
+        ./patches/regions.patch
+        ./patches/unclutter.patch
+        ];
+      });
 
   dwlWrapper = pkgs.writeScriptBin "dwl" ''
     #!/usr/bin/env sh
-    exec ${lib.getExe dwlPackage} -s "
-      swaybg -i ~/.dotfiles/bgs/gruvbox_1.jpg &
+    slstatus -s | ${lib.getExe dwlPackage} -s "
+      swaybg -i ~/.dotfiles/bgs/gruvbox/Clearnight.jpg &
       wl-paste --watch cliphist store &
-      waybar
+      fnott &
+      wlr-randr --output HDMI-A-1 --mode 1920x1080@74.973000 &
       "
   '';
-in {
+in
+{
   programs.dwl = {
     enable = true;
     package = dwlWrapper;
   };
+
   environment.systemPackages = with pkgs; [
     wmenu
     swaybg
+    slstatus
+    wlr-randr
   ];
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 }

@@ -16,8 +16,8 @@
     ];
     config = {
       window = {
-        # titlebar = false;
-        # hideEdgeBorders = "smart";
+        titlebar = false;
+        hideEdgeBorders = "smart";
       };
       startup = [
         {
@@ -42,10 +42,10 @@
           // config.stylix.targets.sway.exportedBarConfig
         )
       ];
-      # gaps = {
-      #   inner = 2;
-      #   outer = 4;
-      # };
+      gaps = {
+        inner = 2;
+        outer = 4;
+      };
 
       input = {
         "*" = {

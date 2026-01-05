@@ -7,11 +7,10 @@
   lib,
   ...
 }: {
-  nix.package = pkgs.lixPackageSets.stable.lix;
   imports = [
     ./hardware-configuration.nix
-    ./modules/nixos/dwl
     ./modules/nixos/greetd
+    ./modules/nixos/dwl
     ./modules/shared
     ./modules/nixos/nivida/nvidia.nix
     ./modules/nixos/keyd
@@ -31,6 +30,7 @@
       }
     ];
   };
+
   environment.shells = with pkgs; [fish];
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
@@ -194,4 +194,6 @@
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
 }

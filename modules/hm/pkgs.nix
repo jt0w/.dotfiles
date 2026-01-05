@@ -27,11 +27,6 @@
     gnumake
     gcc
     cloc
-    # c3c
-    odin
-    nodePackages.nodejs
-    nodePackages.pnpm
-    jetbrains.idea-community-bin
 
     util-linux
     font-awesome
@@ -42,7 +37,7 @@
     cowsay
     nitch
     inetutils
-    deadbeef
+    # deadbeef
     alejandra
     fortune
     dwt1-shell-color-scripts
@@ -91,19 +86,14 @@
     ripgrep
     rhythmbox
     ffmpeg
-    vlc
     mangohud
     protonmail-desktop
 
     # my pkgs
     inputs.kix.packages.${system}.default
 
-    # windows crap
-    # inputs.winboat.packages.${system}.winboat
-    freerdp
-
     swayimg
-    libreoffice
+    # libreoffice
     ferdium
     sshfs
     qmk
@@ -121,6 +111,8 @@
     audacious
     audacious-plugins
     # muffon
+
+    bottles
 
     milkytracker
 
@@ -176,27 +168,16 @@
     element-desktop
   ];
 
-  # TODO: why?
-  # NOTE: needed for some audio plugins
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "libsoup-2.74.3"
-  # ];
-  programs.helix = {
-    enable = true;
-    languages = {
-      language-server.rust-analyzer = {
-        command = "${pkgs.rust-analyzer}/bin/rust-analyzer";
-      };
-    };
-  };
-
   stylix.targets.firefox.profileNames = ["default"];
   programs.firefox = {
     enable = true;
+    arkenfox = {
+      enable = true;
+      version = "140.0";
+    };
     profiles.default = {
       settings = {
         "general.autoScroll" = true;
-        "browser.download.alwaysOpenPanel" = true;
         "browser.download.panel.shown" = true;
         "browser.toolbars.bookmarks.visibility" = "newtab";
         "browser.compactmode.show" = true;
@@ -250,7 +231,6 @@
                 ];
               }
             ];
-
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
             definedAliases = ["@nix"];
           };
@@ -308,6 +288,23 @@
           return-youtube-dislikes
         ];
       };
+      arkenfox = {
+        enable = true;
+        "0000".enable = true;
+        "0100".enable = true;
+        "0200".enable = true;
+        "0300".enable = true;
+        "0400".enable = false;
+        "0600".enable = false;
+        "0700".enable = true;
+        "0800".enable = true;
+        "0900".enable = true;
+        "1000".enable = true;
+        "1200".enable = true;
+        "1700".enable = true;
+        "2600".enable = true;
+        "2700".enable = true;
+      };
     };
   };
   programs.thunderbird = {
@@ -323,4 +320,5 @@
   programs.fastfetch.enable = true;
   programs.radio-active.enable = true;
   services.amberol.enable = true;
+  programs.mpv.enable = true;
 }

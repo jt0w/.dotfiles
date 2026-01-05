@@ -22,7 +22,7 @@
         font-size: 15px;
         font-weight: bold;
         border: none;
-        border-radius: 0;
+       border-radius: 0;
       }
 
       window#waybar {
