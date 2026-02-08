@@ -1,5 +1,5 @@
 {...}: {
-  programs.fish = {
+  programs.bash = {
     enable = true;
 
     shellAliases = {
@@ -7,33 +7,19 @@
       cat = "bat";
       cd = "z";
       ci = "zi";
-      nix-shell = "nix-shell --command fish";
+      nix-shell = "nix-shell --command bash";
     };
 
-    shellAbbrs = {
-      # git
-      ga = "git add";
-      gs = "git status --short";
-      gl = "git log";
-      gcl = "git clone";
-      ghc = {
-        setCursor = "$";
-        expansion = "git clone https://github.com/$";
-      };
-      gc = {
-        setCursor = "$";
-        expansion = "git commit -m '$'";
-      };
-      gca = {
-        setCursor = "$";
-        expansion = "git commit -am '$'";
-      };
-    };
+    initExtra = ''
+      __git_prompt() {
+        GIT_PROMPT=""
+        local branch
+        branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null) || return
+        GIT_PROMPT=" (''${branch})"
+      }
 
-    interactiveShellInit = ''
-      set fish_greeting # Disable greeting
-      fish_config theme choose "Base16 Default Dark" # set theme
-      pokeget random --hide-name
+      PROMPT_COMMAND=__git_prompt
+      export PS1=' \[\e[00;34m\]λ''${GIT_PROMPT} \W \[\e[0m\]'
     '';
   };
 
@@ -47,16 +33,6 @@
     ];
   };
 
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      format = "$jobs$directory$character";
-      right_format = "$all";
-    };
-  };
-
-  programs.atuin.enable = true;
   programs.zoxide.enable = true;
   programs.yazi.enable = true;
   programs.btop.enable = true;

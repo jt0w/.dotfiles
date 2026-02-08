@@ -112,7 +112,7 @@
     audacious-plugins
     # muffon
 
-    bottles
+    # bottles
 
     milkytracker
 
@@ -125,7 +125,7 @@
     odin2
     tunefish
     redux
-    surge
+    # surge
     # surge-XT
     lsp-plugins
     dexed

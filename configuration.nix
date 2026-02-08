@@ -31,11 +31,14 @@
     ];
   };
 
-  environment.shells = with pkgs; [fish];
-  users.defaultUserShell = pkgs.fish;
-  programs.fish.enable = true;
+  environment.shells = with pkgs; [bash];
+  users.defaultUserShell = pkgs.bash;
 
-  environment.systemPackages = [pkgs.man-pages pkgs.man-pages-posix pkgs.xorg.xinit];
+  environment.systemPackages = [
+    pkgs.man-pages
+    pkgs.man-pages-posix
+    pkgs.xorg.xinit
+  ];
   documentation.dev.enable = true;
   documentation.man = {
     enable = true;
@@ -73,6 +76,11 @@
   # Enable networking
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
+  networking.nameservers = [
+    "192.168.178.1"
+    "8.8.8.8"
+    "1.1.1.1"
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -105,7 +113,15 @@
   users.users.lukas = {
     isNormalUser = true;
     description = "Lukas";
-    extraGroups = ["networkmanager" "wheel" "libvirtd" "docker" "audio" "wireshark" "storage"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "docker"
+      "audio"
+      "wireshark"
+      "storage"
+    ];
     packages = [];
   };
   # Allow unfree packages
@@ -178,7 +194,10 @@
   # this value at the release version of the first install of this system. Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.settings.trusted-users = ["lukas"];
   services.hardware.openrgb.enable = true;
   programs.coolercontrol = {

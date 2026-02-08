@@ -3,8 +3,7 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   dwlPackage =
     (pkgs.dwl.override {
       configH = pkgs.replaceVars ./config.def.h {
@@ -26,21 +25,21 @@ let
         base0F = config.lib.stylix.colors.base0F;
       };
     }).overrideAttrs
-      (old: {
-        buildInputs =
-          (old.buildInputs or [])
-          ++ (with pkgs; [
-              fcft
-              libdrm
-          ]);
-        patches = [
+    (old: {
+      buildInputs =
+        (old.buildInputs or [])
+        ++ (with pkgs; [
+          fcft
+          libdrm
+        ]);
+      patches = [
         ./patches/bar.patch
         ./patches/bar-appicons.patch
         ./patches/gaps.patch
         ./patches/regions.patch
         ./patches/unclutter.patch
-        ];
-      });
+      ];
+    });
 
   dwlWrapper = pkgs.writeScriptBin "dwl" ''
     #!/usr/bin/env sh
@@ -51,8 +50,7 @@ let
       wlr-randr --output HDMI-A-1 --mode 1920x1080@74.973000 &
       "
   '';
-in
-{
+in {
   programs.dwl = {
     enable = true;
     package = dwlWrapper;
@@ -66,7 +64,7 @@ in
   ];
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 }

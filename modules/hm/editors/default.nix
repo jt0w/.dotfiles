@@ -13,6 +13,7 @@
       base16-theme = theme;
     })
 
+    # 08/02/2026: TODO: these dont actually work
     (typst.withPackages (
       p:
         with p; [

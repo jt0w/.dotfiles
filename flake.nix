@@ -16,11 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-config = {
-      url = "github:jt0w/.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    neovim-config.url = "github:jt0w/.nvim";
     musnix = {
       url = "github:musnix/musnix";
     };
