@@ -4,7 +4,8 @@
   ghostty,
   system,
   ...
-}: {
+}:
+{
   # nixpkgs
   nixpkgs.config = {
     allowUnfree = true;
@@ -49,7 +50,6 @@
     man
     wget
     file
-    legcord
     discordo
     appimage-run
     pokeget-rs
@@ -168,7 +168,7 @@
     element-desktop
   ];
 
-  stylix.targets.firefox.profileNames = ["default"];
+  stylix.targets.firefox.profileNames = [ "default" ];
   programs.firefox = {
     enable = true;
     arkenfox = {
@@ -200,7 +200,84 @@
         "general.smoothScroll.msdPhysics.enabled" = true;
 
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
+      userChrome = ''
+        /**
+        * Hide sidebar-panel-header (sidebar.revamp: true)
+        */
+        #sidebar-panel-header {
+          display: none;
+        }
+
+        /**
+        * Dynamic styles
+        *
+        * Choose when styles below will be activated (comment/uncomment line)
+        * - When Sidebery set title preface "."
+        * - When Sidebery sidebar is active
+        */
+        /* #main-window[titlepreface="."] {* /
+        /* #main-window:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][checked="true"]) { */
+
+          /* Hide horizontal native tabs toolbar */
+          #TabsToolbar > * {
+            display: none !important;
+          }
+
+          /* Hide top window border */
+          #nav-bar {
+            border-color: transparent !important;
+          }
+
+          /* Hide new Firefox sidebar, restyle addon's sidebar */
+          #sidebar-main, #sidebar-launcher-splitter {
+            display: none !important;
+          }
+          #sidebar-box {
+            padding: 0 !important;
+          }
+          #sidebar-box #sidebar {
+            box-shadow: none !important;
+            border: none !important;
+            outline: none !important;
+            border-radius: 0 !important;
+          }
+          #sidebar-splitter {
+            --splitter-width: 3px !important;
+            min-width: var(--splitter-width) !important;
+            width: var(--splitter-width) !important;
+            padding: 0 !important;
+            margin: 0 calc(-1*var(--splitter-width) + 1px) 0 0 !important;
+            border: 0 !important;
+            opacity: 0 !important;
+          }
+
+          /* Update background color of the #browser area (it's visible near the
+          rounded corner of the web page) so it blends with sidebery color with 
+          vertical nav-bar. */
+          /* #browser {
+            background-color: var(--lwt-accent-color) !important;
+            background-image: none !important;
+          } */
+
+          /* Hide sidebar header (sidebar.revamp: false) */
+          #sidebar-header {
+            display: none !important;
+          }
+
+          /* Uncomment the block below to show window buttons in Firefox nav-bar 
+          (maybe, I didn't test it on non-linux-tiled-wm env) */
+          /* #nav-bar > .titlebar-buttonbox-container,
+          #nav-bar > .titlebar-buttonbox-container > .titlebar-buttonbox {
+            display: flex !important;
+          } */
+
+          /* Uncomment one of the lines below if you need space near window buttons */
+          /* #nav-bar > .titlebar-spacer[type="pre-tabs"] { display: flex !important; } */
+          /* #nav-bar > .titlebar-spacer[type="post-tabs"] { display: flex !important; } */
+        /* } */
+      '';
 
       search = {
         default = "duckduckgo";
@@ -232,7 +309,7 @@
               }
             ];
             icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-            definedAliases = ["@nix"];
+            definedAliases = [ "@nix" ];
           };
           "Github" = {
             urls = [
@@ -251,7 +328,7 @@
               }
             ];
 
-            definedAliases = ["@gh"];
+            definedAliases = [ "@gh" ];
           };
           "Github User" = {
             urls = [
@@ -270,7 +347,7 @@
               }
             ];
 
-            definedAliases = ["@ghu"];
+            definedAliases = [ "@ghu" ];
           };
         };
         force = true;
@@ -286,6 +363,7 @@
           unpaywall
           untrap-for-youtube
           return-youtube-dislikes
+          sidebery
         ];
       };
       arkenfox = {
@@ -309,7 +387,7 @@
   };
   programs.thunderbird = {
     enable = true;
-    profiles = {};
+    profiles = { };
   };
   programs.zathura.enable = true;
   gtk.iconTheme = {
@@ -321,4 +399,5 @@
   programs.radio-active.enable = true;
   services.amberol.enable = true;
   programs.mpv.enable = true;
+  programs.vesktop.enable = true;
 }

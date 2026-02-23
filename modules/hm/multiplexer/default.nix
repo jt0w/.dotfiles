@@ -57,6 +57,10 @@
         set -g status-left-length 99
         set -g status-right-length 99
         set -g status-justify absolute-centre
+
+        set -gq allow-passthrough on
+        set -g visual-activity off
+        set-option -g focus-events on
       '';
   };
 }

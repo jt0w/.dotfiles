@@ -10,7 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     ./modules/nixos/greetd
-    ./modules/nixos/dwl
+    ./modules/nixos/hypr
     ./modules/shared
     ./modules/nixos/nivida/nvidia.nix
     ./modules/nixos/keyd
