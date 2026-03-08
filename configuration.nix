@@ -10,10 +10,9 @@
   imports = [
     ./hardware-configuration.nix
     ./modules/nixos/greetd
-    ./modules/nixos/hypr
     ./modules/shared
     ./modules/nixos/nivida/nvidia.nix
-    ./modules/nixos/keyd
+    ./modules/nixos/kanata
   ];
   nixpkgs.overlays = overlays;
   #bluetooth
@@ -65,6 +64,7 @@
   # kernelPackages
   boot.kernelPackages = pkgs.linuxPackages;
   hardware.enableAllFirmware = true;
+  boot.kernelModules = [ "uinput" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -121,6 +121,7 @@
       "audio"
       "wireshark"
       "storage"
+      "uinput"
     ];
     packages = [];
   };
@@ -133,7 +134,7 @@
     after = lib.mkForce ["graphical.target"];
   };
   virtualisation.libvirtd = {
-    enable = true;
+    enable = false;
 
     qemu = {
       # ovmf.enable = true;
@@ -207,7 +208,8 @@
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
-  '';
+    KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput", GROUP="input", MODE="0660"
+    '';
   security.polkit.enable = true;
 
   services.devmon.enable = true;

@@ -17,9 +17,6 @@
     clearDefaultKeybinds = true;
 
     settings = {
-      background-opacity = 0.8;
-      cursor-opacity = 0.8;
-
       font-feature = "cv1,cv03,cv05,cv06,cv08,cv61,ss03,ss07,ss09,ss11,ss10";
 
       clipboard-read = "allow";
@@ -42,7 +39,7 @@
       gtk-wide-tabs = false;
       gtk-custom-css = "./custom.css";
 
-      custom-shader = "./cursor-warp.glsl";
+      # custom-shader = "./cursor-warp.glsl";
 
       quick-terminal-position = "center";
 
@@ -90,9 +87,6 @@
   programs.foot = {
     enable = true;
     settings = {
-      colors = {
-        alpha = 0.8;
-      };
       mouse = {
         hide-when-typing = "yes";
       };

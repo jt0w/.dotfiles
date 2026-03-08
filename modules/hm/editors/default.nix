@@ -24,6 +24,7 @@
           hydra # headings
           pinit # pining
           touying # slides
+          lilaq
         ]
     ))
   ];

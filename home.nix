@@ -13,7 +13,8 @@
     ./modules/hm/git
     ./modules/hm/editors
     ./modules/hm/music
-    ./modules/hm/hypr
+    # ./modules/hm/hypr
+    ./modules/hm/sway
     ./modules/hm/multiplexer
     ./modules/hm/direnv/direnv.nix
     ./modules/hm/pkgs.nix
