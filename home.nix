@@ -18,6 +18,7 @@
     ./modules/hm/multiplexer
     ./modules/hm/direnv/direnv.nix
     ./modules/hm/pkgs.nix
+    ./modules/hm/pkgs
     ./modules/shared
   ];
   home.stateVersion = "23.05"; # Please read the comment before changing.

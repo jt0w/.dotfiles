@@ -8,6 +8,13 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  stylix.targets.emacs.enable = false;
+  services.emacs.enable = true;
+  programs.emacs = {
+    enable = true;
+    package = inputs.emacs-config.packages.${system}.default;
+  };
+
   home.packages = with pkgs; [
     (inputs.neovim-config.packages.${system}.default.override {
       base16-theme = theme;
@@ -20,11 +27,13 @@
           cetz # drawing
           codly # code
           fletcher # diagrams
-          frame-it #frames
+          frame-it # frames
           hydra # headings
           pinit # pining
           touying # slides
           lilaq
+          herodot
+          basic-resume
         ]
     ))
   ];

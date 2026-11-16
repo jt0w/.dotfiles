@@ -9,7 +9,6 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./modules/nixos/greetd
     ./modules/shared
     ./modules/nixos/nivida/nvidia.nix
     ./modules/nixos/kanata
@@ -19,6 +18,8 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true; # blueman
+
+  programs.sway.enable = true;
 
   services.xserver = {
     enable = true;
@@ -32,6 +33,11 @@
 
   environment.shells = with pkgs; [bash];
   users.defaultUserShell = pkgs.bash;
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   environment.systemPackages = [
     pkgs.man-pages
@@ -54,17 +60,17 @@
     jack.enable = true;
   };
   services.pipewire.wireplumber.enable = true;
+  environment.sessionVariables.ALSA_AUDIO_OUT = "pipewire";
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.consoleLogLevel = 0;
-  hardware.alsa.enable = true;
 
   # kernelPackages
   boot.kernelPackages = pkgs.linuxPackages;
   hardware.enableAllFirmware = true;
-  boot.kernelModules = [ "uinput" ];
+  boot.kernelModules = ["uinput"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -122,6 +128,8 @@
       "wireshark"
       "storage"
       "uinput"
+      "lp"
+      "scanner"
     ];
     packages = [];
   };
@@ -159,8 +167,24 @@
   services.openssh.enable = true;
 
   programs.steam.enable = true;
-  programs.obs-studio.enable = true;
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
+  programs.obs-studio.enable = true;
+  # Printing
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  hardware.sane.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
 
   programs.thunar.enable = true;
 
@@ -188,6 +212,9 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.firewall.extraCommands = ''
+    iptables -I nixos-fw -s 172.16.0.0/12 -p tcp --dport 11434 -j nixos-fw-accept
+  '';
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -209,12 +236,33 @@
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="pcieport", ATTR{power/wakeup}="disabled"
     KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput", GROUP="input", MODE="0660"
-    '';
+  '';
   security.polkit.enable = true;
 
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # Sway doesn't ship a file chooser portal, so add gtk for that
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    config.sway = {
+      default = ["gtk"];
+      "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+      "org.freedesktop.impl.portal.Screenshot" = "wlr";
+    };
+    config.screencast = {
+      chooser_type = "simple";
+      chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+    };
+  };
+  systemd.user.services.xdg-desktop-portal-wlr.path = [pkgs.fuzzel];
+
+  programs.kdeconnect.enable = true;
+
+  services.ollama = {
+    enable = true;
+    host = "0.0.0.0";
+  };
 }

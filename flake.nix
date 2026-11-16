@@ -7,9 +7,6 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:nix-community/stylix";
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-    };
 
     kix = {
       url = "github:jt0w/kix";
@@ -17,6 +14,8 @@
     };
 
     neovim-config.url = "github:jt0w/.nvim";
+    emacs-config.url = "github:jt0w/.emacs";
+
     musnix = {
       url = "github:musnix/musnix";
     };
@@ -36,7 +35,6 @@
     nixpkgs,
     home-manager,
     stylix,
-    ghostty,
     ...
   }: let
     system = "x86_64-linux";
@@ -77,7 +75,6 @@
       extraSpecialArgs = {
         inherit inputs;
         inherit overlays;
-        inherit ghostty;
         inherit flake-dir;
         inherit system;
         inherit theme;

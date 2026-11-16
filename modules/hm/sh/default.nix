@@ -20,6 +20,12 @@
 
       PROMPT_COMMAND=__git_prompt
       export PS1=' \[\e[00;34m\]λ''${GIT_PROMPT} \W \[\e[0m\]'
+
+
+      function print_osc7() {
+        printf '\033]7;file://%s\033\\' "$PWD"
+      }
+      PROMPT_COMMAND='print_osc7'
     '';
   };
 

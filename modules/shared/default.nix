@@ -8,7 +8,7 @@
   stylix.enable = true;
   stylix.image = flake-dir + /bgs/gruvbox/Clearday.jpg;
 
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/${theme}.yaml";
+  stylix.base16Scheme = "${flake-dir}/modules/shared/retrobox.yaml";
   stylix.polarity = polarity;
 
   stylix.cursor.package = pkgs.phinger-cursors;

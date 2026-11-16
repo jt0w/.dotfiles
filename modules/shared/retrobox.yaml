@@ -1,0 +1,44 @@
+system: "base16"
+name: "Retrobox"
+author: "Maxim Kim (habamax@gmail.com), ported from gruvbox8 by Lifepillar; base16 mapping by Claude"
+variant: "dark"
+ 
+# Colors sourced directly from vim/colorschemes/colors/retrobox.vim
+# https://github.com/vim/colorschemes/blob/master/colors/retrobox.vim
+#
+# Base16 slot mapping rationale:
+#   base00  Default background          → Normal guibg
+#   base01  Lighter bg (cursorline)     → CursorLine guibg
+#   base02  Selection bg (popup menu)   → Pmenu guibg
+#   base03  Comments / invisibles       → Comment guifg
+#   base04  Dark foreground (line nr)   → LineNr guifg
+#   base05  Default foreground          → Normal guifg
+#   base06  Light foreground (cursor)   → Cursor guibg
+#   base07  Lightest background         → gruvbox light0_hard (light mode bg)
+#   base08  Red – errors / diff del     → fb5944  (Keyword / Conditional)
+#   base09  Orange – constants          → fe8019  (Delimiter)
+#   base0A  Yellow – classes / search   → fabd2f  (CursorLineNr / ModeMsg)
+#   base0B  Green – strings             → b8bb26  (Function / Directory)
+#   base0C  Cyan – support / escape     → 8ec07c  (Define / Include / Operator)
+#   base0D  Blue – functions / ids      → 83a598  (Identifier)
+#   base0E  Purple – keywords           → d3869b  (Boolean / Constant / Number)
+#   base0F  Brown / dark red – deprecated → cc241d (ANSI 1 – neutral red)
+ 
+palette:
+  base00: "1c1c1c"   # Normal bg
+  base01: "303030"   # CursorLine bg
+  base02: "3c3836"   # Pmenu bg / selection bg
+  base03: "928374"   # Comment fg  (ANSI 8 – bright black)
+  base04: "a89984"   # LineNr / conceal (ANSI 7 – white)
+  base05: "ebdbb2"   # Normal fg   (ANSI 15 – bright white)
+  base06: "fbf1c7"   # Cursor bg / light fg
+  base07: "f9f5d7"   # Lightest bg (gruvbox light0_hard, used in light variant)
+  base08: "fb5944"   # Keyword / Conditional / Error  (ANSI 9 – bright red)
+  base09: "fe8019"   # Delimiter / orange
+  base0A: "fabd2f"   # CursorLineNr / ModeMsg / yellow  (ANSI 11 – bright yellow)
+  base0B: "b8bb26"   # Function / Directory / strings   (ANSI 10 – bright green)
+  base0C: "8ec07c"   # Define / Include / Operator / cyan (ANSI 14 – bright cyan)
+  base0D: "83a598"   # Identifier / blue                (ANSI 12 – bright blue)
+  base0E: "d3869b"   # Boolean / Constant / Number / purple (ANSI 13 – bright purple)
+  base0F: "cc241d"   # Neutral red / deprecated         (ANSI 1 – red)
+ 

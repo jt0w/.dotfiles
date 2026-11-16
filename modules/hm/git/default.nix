@@ -3,11 +3,15 @@
     enable = true;
     package = pkgs.gitFull;
 
-    userEmail = "108518296+SecretVal@users.noreply.github.com";
-    userName = "secretval";
-    extraConfig.credentials = {
-      "https://github.com".helper = "!/home/lukas/.nix-profile/bin/gh auth git-credential";
-      "https://gist.github.com".helper = "!/home/lukas/.nix-profile/bin/gh auth git-credential";
+    settings = {
+      user = {
+        email = "108518296+jt0w@users.noreply.github.com";
+        name = "jt0w";
+      };
+      credentials = {
+        "https://github.com".helper = "!/home/lukas/.nix-profile/bin/gh auth git-credential";
+        "https://gist.github.com".helper = "!/home/lukas/.nix-profile/bin/gh auth git-credential";
+      };
     };
   };
 }

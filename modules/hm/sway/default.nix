@@ -24,10 +24,6 @@
           always = true;
           command = "wl-copy";
         }
-        {
-          always = true;
-          command = "ghostty --initial-window=false";
-        }
       ];
       bars = [
         {
@@ -46,7 +42,7 @@
       };
 
       modifier = "Mod4";
-      terminal = "ghostty";
+      terminal = "foot";
       keybindings = let
         mod = config.wayland.windowManager.sway.config.modifier;
         terminal = config.wayland.windowManager.sway.config.terminal;
@@ -59,7 +55,7 @@
           "${mod}+b" = "exec ${browser}";
           "${mod}+q" = "kill";
           "${mod}+d" = "exec fuzzel -f 'JetBrainsMono Nerd Font Mono'-16";
-          "${mod}+v" = "exec cliphist list | fuzzel -d -f 'JetBrainsMono Nerd Font Mono'-16 | cliphist decode | wl-copy";
+          "${mod}+shift+v" = "exec cliphist list | fuzzel -d -f 'JetBrainsMono Nerd Font Mono'-16 | cliphist decode | wl-copy";
           "${mod}+t" = "exec grim ~/HDD/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')";
           "${mod}+shift+t" = "exec slurp | grim -g - ~/HDD/Pictures/$(date +'screenshot_%Y-%m-%d-%H%M%S.png')";
           "${mod}+a" = "exec foot -e pulsemixer";

@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  ghostty,
   system,
   ...
 }: {
@@ -9,6 +8,9 @@
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = true;
+	permittedInsecurePackages = [
+      "firefox-esr-140-bin-unwrapped-140.17.0esr"
+	];
   };
   # fonts
   fonts.fontconfig.enable = true;
@@ -18,7 +20,7 @@
     cm_unicode
 
     # ESSENTIAL
-    woomer
+
     # edb
     gdb
     gf
@@ -27,11 +29,13 @@
     gnumake
     gcc
     cloc
+    unzip
 
     util-linux
     font-awesome
     corefonts
     fyi
+    openvpn
 
     sl
     cowsay
@@ -49,19 +53,16 @@
     man
     wget
     file
-    discordo
     appimage-run
     pokeget-rs
     prismlauncher
+    blockbench
 
     libresprite
     krita
-    inkscape
-    penpot-desktop
-    mypaint
-    mypaint-brushes
-    mypaint-brushes1
-    libsForQt5.qt5.qtwayland
+    # gimp
+    # inkscape
+    qt5.qtwayland
     glfw
 
     htop
@@ -69,42 +70,50 @@
     gh
     killall
 
+    kdePackages.skanlite
+
     qpwgraph
     pulsemixer
     bluez
-    swww
+    awww
 
+    kicad
+    (python313.withPackages (ps: [ps.wxpython]))
+	zotero
     #dev
     just
     fasm
 
     #extra
-    bitwarden-desktop
+    # bitwarden-desktop
     openssl
     bat
     ripgrep
-    rhythmbox
     ffmpeg
-    mangohud
-    protonmail-desktop
+    digikam
 
     # my pkgs
     inputs.kix.packages.${system}.default
 
     swayimg
-    # libreoffice
-    ferdium
+    libreoffice
     sshfs
     qmk
-
-    ghostty.packages.${system}.default
 
     # games
     # lutris
     # daggerfall-unity
+    openttd
+    runelite
+    # mindustry-wayland
+    # zeroad
+    beyond-all-reason
+    freeorion
+    # endless-sky
 
     # music
     ardour
+    # mixxx
     audacity
     bespokesynth
     audacious
@@ -113,13 +122,14 @@
 
     # bottles
 
-    milkytracker
-
     musescore
     muse-sounds-manager
 
+    guitarix
+    gxplugins-lv2
+
     distrho-ports
-    # carla
+    carla
     helm
     odin2
     tunefish
@@ -143,8 +153,8 @@
     # artyFX
     bchoppr
     dragonfly-reverb
-    eq10q
-    # infamousPlugins
+    # eq10q
+    infamousPlugins
     oxefmsynth
     sfizz
     chow-kick
@@ -163,17 +173,11 @@
 
     linuxsampler
     qsampler
-
-    element-desktop
   ];
 
-  stylix.targets.firefox.profileNames = ["default"];
-  programs.firefox = {
+  stylix.targets.librewolf.profileNames = ["default"];
+  programs.librewolf = {
     enable = true;
-    arkenfox = {
-      enable = true;
-      version = "140.0";
-    };
     profiles.default = {
       settings = {
         "general.autoScroll" = true;
@@ -182,7 +186,6 @@
         "browser.compactmode.show" = true;
         "widget.non-native-theme.scrollbar.style" = 3;
         "browser.tabs.closeWindowWithLastTab" = false;
-        "browser.tabs.tabmanager.enabled" = true;
         "mousewheel.default.delta_multiplier_y" = 300;
 
         "browser.vpn_promo.enabled" = false;
@@ -200,82 +203,16 @@
 
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "sidebar.revamp" = false;
       };
       userChrome = ''
-                /**
-                 * Hide sidebar-panel-header (sidebar.revamp: true)
-                 */
-        #sidebar-panel-header {
-          display: none;
-        }
+        #TabsToolbar			{ display: none				!important;	}
+        #sidebar-header      	{ display: none				!important;	}
+        #sidebar-box			{ padding-inline-start: 0px !important;	}
 
-        /**
-         * Dynamic styles
-         *
-         * Choose when styles below will be activated (comment/uncomment line)
-         * - When Sidebery set title preface "."
-         * - When Sidebery sidebar is active
-         */
-        /* #main-window[titlepreface="."] {* /
-        /* #main-window:has(#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"][checked="true"]) { */
-
-        /* Hide horizontal native tabs toolbar */
-        #TabsToolbar > * {
-        display: none !important;
+              * {
+          border-radius: 0px !important;
         }
-
-        /* Hide top window border */
-        #nav-bar {
-          border-color: transparent !important;
-        }
-
-        /* Hide new Firefox sidebar, restyle addon's sidebar */
-        #sidebar-main, #sidebar-launcher-splitter {
-        display: none !important;
-        }
-        #sidebar-box {
-        padding: 0 !important;
-        }
-        #sidebar-box #sidebar {
-          box-shadow: none !important;
-        border: none !important;
-        outline: none !important;
-                 border-radius: 0 !important;
-        }
-        #sidebar-splitter {
-          --splitter-width: 3px !important;
-          min-width: var(--splitter-width) !important;
-        width: var(--splitter-width) !important;
-        padding: 0 !important;
-        margin: 0 calc(-1*var(--splitter-width) + 1px) 0 0 !important;
-        border: 0 !important;
-        opacity: 0 !important;
-        }
-
-        /* Update background color of the #browser area (it's visible near the
-           rounded corner of the web page) so it blends with sidebery color with
-           vertical nav-bar. */
-        #browser {
-          background-color: var(--lwt-accent-color) !important;
-          background-image: none !important;
-        }
-
-        /* Hide sidebar header (sidebar.revamp: false) */
-        #sidebar-header {
-        display: none !important;
-        }
-
-        /* Uncomment the block below to show window buttons in Firefox nav-bar
-           (maybe, I didn't test it on non-linux-tiled-wm env) */
-        /* #nav-bar > .titlebar-buttonbox-container,
-        #nav-bar > .titlebar-buttonbox-container > .titlebar-buttonbox {
-        display: flex !important;
-        } */
-
-        /* Uncomment one of the lines below if you need space near window buttons */
-        /* #nav-bar > .titlebar-spacer[type="pre-tabs"] { display: flex !important; } */
-        /* #nav-bar > .titlebar-spacer[type="post-tabs"] { display: flex !important; } */
-        /* } */
       '';
 
       search = {
@@ -354,33 +291,17 @@
       extensions = {
         force = true;
         packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          stylus
           bitwarden
           sponsorblock
           darkreader
           vimium
           ublock-origin
           unpaywall
-          untrap-for-youtube
           return-youtube-dislikes
           sidebery
+		  zotero-connector
         ];
-      };
-      arkenfox = {
-        enable = true;
-        "0000".enable = true;
-        "0100".enable = true;
-        "0200".enable = true;
-        "0300".enable = true;
-        "0400".enable = false;
-        "0600".enable = false;
-        "0700".enable = true;
-        "0800".enable = true;
-        "0900".enable = true;
-        "1000".enable = true;
-        "1200".enable = true;
-        "1700".enable = true;
-        "2600".enable = true;
-        "2700".enable = true;
       };
     };
   };
@@ -409,6 +330,6 @@
   programs.radio-active.enable = true;
   services.amberol.enable = true;
   programs.mpv.enable = true;
-  programs.vesktop.enable = true;
-  programs.irssi.enable = true;
+  # programs.vesktop.enable = true;
+  # programs.irssi.enable = true;
 }

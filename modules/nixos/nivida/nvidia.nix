@@ -26,4 +26,5 @@
     nvidiaSettings = true;
     # nvidiaPersistenced = true;
   };
+  hardware.graphics.enable = true;
 }

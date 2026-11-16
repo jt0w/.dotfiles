@@ -1,0 +1,5 @@
+* TODOs
++ [ ] switch to [determinate-nix](https://docs.determinate.systems/determinate-nix/)
++ [ ] switch from sway to something prettier bc I am getting fed up with this square looking aestetic
+  - maybe also just a new theme or something like that
++ [ ] Clean up configuration.nix

@@ -1,5 +1,8 @@
 {...}: {
-  systemd.services."kanata-default".serviceConfig.SupplementaryGroups = [ "input" "uinput" ];
+  systemd.services."kanata-default".serviceConfig.SupplementaryGroups = [
+    "input"
+    "uinput"
+  ];
   services.kanata = {
     enable = true;
     keyboards = {
@@ -7,30 +10,16 @@
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc
-            w r
-            caps a s d f j k l ;
-            spc
-            ret
-            )
+           caps
+          )
 
           (deflayer base
-                    w r
-                    @caps a s d f j k l ;
-                    spc
-                    ret
-                    )
-
-          (deflayer specials
-                    C-w C-r
-                    _ S-8 S-9 RA-7 RA-0 RA-8 RA-9 C-l @ctl
-                    M-d
-                    M-ret
-                    )
+           @caps
+          )
 
           (defalias
-            caps (tap-hold 75 125 esc (layer-toggle specials))
-            ctl  (multi lctl (layer-while-held base))
-            )
+           caps (tap-hold-press 75 125 esc lctl)
+          )
         '';
       };
     };
